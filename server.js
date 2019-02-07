@@ -1,14 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser')
-const cors = require('cors');
+const express = require('express')
+const cors = require('cors')
+const clarifai = require('./controllers/clarifai')
 
 const app = express()
 
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => {
-    res.status(200).sendFile('readme.html', {root: __dirname})
-})
+app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
+app.post('/clarifai', clarifai.handleImage)
 
-app.listen(3001)
+app.listen(3030)
