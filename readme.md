@@ -1,5 +1,5 @@
 # AFWaB Server endpoints </h1>
 
-## /
-### returns this file
+1. /
+    - returns this file
 
