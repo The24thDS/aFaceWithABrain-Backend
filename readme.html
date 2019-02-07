@@ -4,6 +4,12 @@
 <ul>
     <li>returns this file</li>
 </ul>
+<h2>/clarify</h2>
+<ul>
+    <li>takes in a POST request with an <code>image</code> link in JSON format (eg: <code>{"image": "link-of-the-image"}</code>)</li>
+    <li>returns <code>status 200</code> and an object containing the regions with faces if the image in valid</li>
+    <li>returns <code>status 400</code> and a <code>statusText</code> of <code>The image doesn't contain any faces</code> if there are no faces detected</li>
+</ul>
 
 <style>
     h1{padding: 10px}
@@ -15,11 +21,21 @@
         padding: 10px 20px;
         font-size: 30px;
         background-color: darkgrey;
-        border-radius: 5px
+        border-radius: 5px;
+        margin-top: 50px;
     }
     ul{
         padding-left: 65px;
         padding-top: 10px;
         font-size: 20px;
+    }
+    li{
+        padding: 4px 0;
+    }
+    code{
+        padding: 2px 5px;
+        background-color: rgb(20,20,80);
+        border-radius: 5px;
+        color: rgb(90, 148, 241)
     }
 </style>
