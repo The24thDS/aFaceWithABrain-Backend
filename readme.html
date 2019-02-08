@@ -5650,14 +5650,14 @@
         <li>
             <p><code>/clarify</code></p>
             <ul>
-                <li>takes in a POST request with an <code>image</code> link is JSON format</li>
+                <li>takes in a POST request with an <code>image</code> link in JSON format</li>
             </ul>
             <pre><code class="language-json">{
     "<span class="hljs-attribute">image</span>": <span class="hljs-value"><span class="hljs-string">"link-of-the-image"</span>
 </span>}
 </code></pre>
             <ul>
-                <li>returns <code>status 200</code> and an object containing the regions with faces if the image in
+                <li>returns <code>status 200</code> and an object containing the regions with faces if the image is
                     valid</li>
                 <li>returns <code>status 400</code> and a <code>statusText</code> of
                     <code>The image doesn't contain any faces</code> if there are no faces detected</li>

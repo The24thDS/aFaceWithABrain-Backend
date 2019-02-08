@@ -1,17 +1,22 @@
 
-const validateEmail = (email) => {
-    const regex = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+const validUsername = (username) => {
+    const regex = new RegExp(/^[a-zA-Z0-9]{5,254}$/)
+    return regex.text(username)
+}
+
+const validEmail = (email) => {
+    const regex = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/)
     return regex.test(email)
 }
 
-const validatePassword = (password) => {
+const validPassword = (password) => {
     const regex = new RegExp(/^(?=.*\d)(?=.*[.,<>?'"[\]{}`~!@#$%^&*()\-+_/\\])(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,35}$$/) // eg: testPassword.1
     return regex.test(password)
 }
 
 const handleRegister = (req, res, db, bcrypt) => {
     const { username, email, password } = req.body
-    if(!validateEmail(email))
+    if(!validEmail(email))
     {
         res.status(400).json({
             status: "Error",
@@ -19,7 +24,7 @@ const handleRegister = (req, res, db, bcrypt) => {
         })
         return 1
     }
-    if(!validatePassword(password))
+    if(!validPassword(password))
     {
         res.status(400).json({
             status: "Error",
@@ -40,11 +45,11 @@ const handleRegister = (req, res, db, bcrypt) => {
             })
         })
         .then(trx.commit)
-        .then(()=>{
+        .then(()=>{ //everything was inserted
             res.status(200).json({
                 status: "Success",
                 message: "You have successfully registered 👍"
-            }) //everything was inserted
+            }) 
         })
         .catch(trx.rollback)
     }).catch(err => {

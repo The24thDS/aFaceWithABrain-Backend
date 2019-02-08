@@ -20,7 +20,6 @@ app.use(cors())
 
 app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
 app.post('/clarifai', clarifai.handleImage)
-
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
 
 app.listen(3030)
