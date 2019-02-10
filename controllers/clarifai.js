@@ -1,3 +1,4 @@
+const log = require('./log')
 const Clarifai = require('clarifai')
 const app = new Clarifai.App({
     apiKey: '16f06809f7d04ad980c8a0e551499833'
@@ -15,7 +16,10 @@ const handleImage = (req, res) => {
             }
         else res.status(200).json(clarifaiResponse.outputs[0].data)
     })
-    .catch(err => console.log("AI is taking over the world"));
+    .catch(err => {
+        log.logError(__filename, err)
+        console.log("AI is taking over the world")
+    });
 }
 
 module.exports = {
