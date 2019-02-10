@@ -5685,7 +5685,8 @@
 </span>}
 </code></pre>
             <ul>
-                <li>returns a <code>status 400</code> and a response in JSON format if the registration has failed because:
+                <li>returns a <code>status 400</code> and a response in JSON format if the registration has failed
+                    because:
                     <ul>
                         <li>the email is already registered</li>
                         <li>the email is not valid</li>
@@ -5696,6 +5697,36 @@
             <pre><code class="language-json">{
     "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Error"</span></span>,
     "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Different message depending on the failure reason"</span>
+</span>}
+</code></pre>
+        </li>
+        <li>
+            <p><code>/signin</code></p>
+            <ul>
+                <li>takes in a POST request with the <code>email</code> and the <code>password</code> in JSON format
+                </li>
+            </ul>
+            <pre><code class="language-JSON">{
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"user-email"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"user-password"</span>
+</span>}
+</code></pre>
+            <ul>
+                <li>returns a <code>status 200</code> and a response in JSON format if the login operation has succeeded
+                </li>
+            </ul>
+            <pre><code class="language-json">{
+    "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span></span>,
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"You have successfully logged in 👍"</span>
+</span>}
+</code></pre>
+            <ul>
+                <li>returns a <code>status 400</code> and a response in JSON format if the login operation has failed
+                </li>
+            </ul>
+            <pre><code class="language-json">{
+    "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Error"</span></span>,
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"🤚 Wrong credentials 🛑"</span>
 </span>}
 </code></pre>
         </li>

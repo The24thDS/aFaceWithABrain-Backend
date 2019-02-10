@@ -39,3 +39,26 @@
         "message": "Different message depending on the failure reason"
     }
     ```
+
+4. `/signin`
+    - takes in a POST request with the `email` and the `password` in JSON format
+    ```JSON
+    {
+        "email": "user-email",
+        "password": "user-password"
+    }
+    ```
+    - returns a `status 200` and a response in JSON format if the login operation has succeeded
+    ```json
+    {
+        "status": "Success",
+        "message": "You have successfully logged in 👍"
+    }
+    ```
+    - returns a `status 400` and a response in JSON format if the login operation has failed
+    ```json
+    {
+        "status": "Error",
+        "message": "🤚 Wrong credentials 🛑"
+    }
+    ```
