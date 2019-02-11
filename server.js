@@ -23,5 +23,16 @@ app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dir
 app.post('/clarifai', clarifai.handleImage)
 app.post('/register', register.handleRegister(db, bcrypt))
 app.post('/signin', signin.handleLogin(db, bcrypt))
+app.post('/entries', async (req, res) => {
+    const { email } = req.body
+    const queryResult = await db('users').select('entries').where({email})
+    const { entries } = queryResult[0]
+    res.status(200).json({
+      status: "Success",
+      response: {
+        entries
+      }
+    })
+})
 
 app.listen(3030)
