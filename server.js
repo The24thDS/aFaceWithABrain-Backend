@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
-app.post('/clarifai', clarifai.handleImage)
+app.post('/clarifai', clarifai.handleImage(db))
 app.post('/register', register.handleRegister(db, bcrypt))
 app.post('/signin', signin.handleLogin(db, bcrypt))
 app.post('/entries', async (req, res) => {

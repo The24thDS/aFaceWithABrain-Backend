@@ -1,0 +1,1 @@
+In C:\Users\david\OneDrive\Desktop\zero to mastery\aFaceWithABrain-Backend\controllers\signin.js at 2019-02-11T12:08:11.060Z: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client 
