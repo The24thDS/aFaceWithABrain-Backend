@@ -1,15 +1,9 @@
-const username = (username) => {
-    const regex = new RegExp(/^[a-zA-Z0-9]{5,254}$/)
-    return regex.text(username)
-}
-const email = (email) => {
-    const regex = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/)
-    return regex.test(email)
-}
-const password = (password) => { // eg: testPassword.1
-    const regex = new RegExp(/^(?=.*\d)(?=.*[.,<>?'"[\]{}`~!@#$%^&*()\-+_/\\])(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,35}$$/) 
-    return regex.test(password)
-}
+const validation = (input, regex) => regex.test(input)
+
+const username = username => validation(username, new RegExp(/^[a-zA-Z0-9]{5,254}$/))
+const email = email => validation(email, new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/))
+const password = password => validation(password, new RegExp(/^(?=.*\d)(?=.*[.,<>?'"[\]{}`~!@#$%^&*()\-+_/\\])(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,35}$$/)) // eg: testPassword.1
+
 
 module.exports = {
     username,
