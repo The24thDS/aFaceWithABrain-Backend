@@ -32,5 +32,6 @@ app.post('/entries', async (req, res) => {
       }
     })
 })
+app.get('/log', (req, res) => {res.status(200).sendFile('logs/errors.log', {root: __dirname})}})
 
 app.listen(process.env.PORT)
