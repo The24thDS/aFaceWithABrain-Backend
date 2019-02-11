@@ -1,7 +1,7 @@
 const log = require('./log')
 const Clarifai = require('clarifai')
 const app = new Clarifai.App({
-    apiKey: '16f06809f7d04ad980c8a0e551499833'
+    apiKey: process.env.API
 })
 const handleImage = db => (req, res) => {
     app.models.predict(

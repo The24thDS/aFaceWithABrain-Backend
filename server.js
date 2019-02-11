@@ -6,12 +6,8 @@ const signin = require('./controllers/signin')
 const bcrypt = require('bcryptjs')
 const db = require('knex')({
     client: 'pg',
-    connection: {
-      host : '127.0.0.1',
-      user : 'postgres',
-      password : 'open',
-      database : 'smartbrain'
-    }
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
 })
 
 const app = express()
@@ -35,4 +31,4 @@ app.post('/entries', async (req, res) => {
     })
 })
 
-app.listen(3030)
+app.listen(process.env.PORT)
