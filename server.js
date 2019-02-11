@@ -6,14 +6,16 @@ const signin = require('./controllers/signin')
 const bcrypt = require('bcryptjs')
 const db = require('knex')({
     client: 'pg',
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: true
+    }
 })
 
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({"Access-Control-Allow-Origin": '*'}))
 
 app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
 app.post('/clarifai', clarifai.handleImage(db))
