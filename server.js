@@ -19,9 +19,9 @@ const cors = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.header('Access-Control-Allow-Headers', '*')
-  if(req.get('host') !== 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
-    res.status(403).json(`${req.get('host')} is not allowed`)
-  else
+  // if(req.get('host') !== 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
+  //   res.status(403).json(`${req.get('host')} is not allowed`)
+  // else
     next()
 }
 
