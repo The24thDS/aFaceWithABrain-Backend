@@ -17,13 +17,17 @@ app.use(express.json())
 
 const cors = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
-  res.header('Access-Control-Allow-Methods', 'HEAD, GET, POST, OPTIONS')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.header('Access-Control-Allow-Headers', '*')
-  next()
+  if(req.get('host') !== 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
+    res.sendStatus(403)
+  else
+    next()
 }
-app.options('/*', cors)
+
+app.use(cors)
 app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
-app.post('/clarifai', cors, clarifai.handleImage(db))
+app.post('/clarifai', clarifai.handleImage(db))
 app.post('/register', register.handleRegister(db, bcrypt))
 app.post('/signin', signin.handleLogin(db, bcrypt))
 app.post('/entries', async (req, res) => {
