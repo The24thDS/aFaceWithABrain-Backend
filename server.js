@@ -12,8 +12,6 @@ const db = require('knex')({
     }
 })
 
-app.use(SwaggerDocs.middleWare(swagger));
-
 const app = express()
 
 app.use(express.json())
