@@ -1,5 +1,4 @@
 const express = require('express')
-const cors = require('cors')
 const clarifai = require('./controllers/clarifai')
 const register = require('./controllers/register')
 const signin = require('./controllers/signin')
@@ -15,16 +14,19 @@ const db = require('knex')({
 const app = express()
 
 app.use(express.json())
-const corsOptions = {
-  origin: 'https://the24thds.github.io/aFaceWithABrain-Frontend/',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
 
-app.get('/', cors(), (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
-app.post('/clarifai', cors(corsOptions), clarifai.handleImage(db))
-app.post('/register', cors(corsOptions), register.handleRegister(db, bcrypt))
-app.post('/signin', cors(corsOptions), signin.handleLogin(db, bcrypt))
-app.post('/entries', cors(corsOptions), async (req, res) => {
+const cors = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
+  res.header('Access-Control-Allow-Methods', 'HEAD, GET, POST, OPTIONS')
+  res.header('Access-Control-Allow-Headers', '*')
+  next()
+}
+app.options('/*', cors)
+app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
+app.post('/clarifai', clarifai.handleImage(db))
+app.post('/register', register.handleRegister(db, bcrypt))
+app.post('/signin', signin.handleLogin(db, bcrypt))
+app.post('/entries', async (req, res) => {
     const { email } = req.body
     const queryResult = await db('users').select('entries').where({email})
     const { entries } = queryResult[0]
@@ -35,6 +37,6 @@ app.post('/entries', cors(corsOptions), async (req, res) => {
       }
     })
 })
-app.get('/log', cors(corsOptions), (req, res) => {res.status(200).sendFile('logs/errors.log', {root: __dirname})})
+app.get('/log', (req, res) => {res.status(200).sendFile('logs/errors.log', {root: __dirname})})
 
 app.listen(process.env.PORT || 3000)
