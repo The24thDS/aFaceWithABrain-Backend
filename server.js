@@ -19,13 +19,12 @@ const corsOptions = {
   origin: 'https://the24thds.github.io/aFaceWithABrain-Frontend/',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-app.use(cors(corsOptions))
 
 app.get('/', cors(), (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
-app.post('/clarifai', clarifai.handleImage(db))
-app.post('/register', register.handleRegister(db, bcrypt))
-app.post('/signin', signin.handleLogin(db, bcrypt))
-app.post('/entries', async (req, res) => {
+app.post('/clarifai', cors(corsOptions), clarifai.handleImage(db))
+app.post('/register', cors(corsOptions), register.handleRegister(db, bcrypt))
+app.post('/signin', cors(corsOptions), signin.handleLogin(db, bcrypt))
+app.post('/entries', cors(corsOptions), async (req, res) => {
     const { email } = req.body
     const queryResult = await db('users').select('entries').where({email})
     const { entries } = queryResult[0]
@@ -36,6 +35,6 @@ app.post('/entries', async (req, res) => {
       }
     })
 })
-app.get('/log', (req, res) => {res.status(200).sendFile('logs/errors.log', {root: __dirname})})
+app.get('/log', cors(corsOptions), (req, res) => {res.status(200).sendFile('logs/errors.log', {root: __dirname})})
 
 app.listen(process.env.PORT || 3000)
