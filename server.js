@@ -16,22 +16,21 @@ const app = express()
 app.use(express.json())
 
 const cors = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-  res.header('Access-Control-Allow-Headers', '*')
-  // if(req.get('host') !== 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
-  //   res.status(403).json(`${req.get('host')} is not allowed`)
-  // else
+  // CORS on steroids
+  if(req.headers.host !== 'the24thds.github.io') //change this in production to match your origin
+    res.status(403).json(`${req.get('host')} is not allowed to access this resource`)
+  else
     next()
 }
 
+app.get('/', (req, res) => {res.redirect("https://documenter.getpostman.com/view/6749839/S11GQzPj")})
 app.use(cors)
-app.get('/', (req, res) => {res.status(200).sendFile('readme.html', {root: __dirname})})
 app.post('/clarifai', clarifai.handleImage(db))
 app.post('/register', register.handleRegister(db, bcrypt))
 app.post('/signin', signin.handleLogin(db, bcrypt))
-app.post('/entries', async (req, res) => {
+app.get('/entries', async (req, res) => {
     const { email } = req.body
+    try {
     const queryResult = await db('users').select('entries').where({email})
     const { entries } = queryResult[0]
     res.status(200).json({
@@ -40,7 +39,17 @@ app.post('/entries', async (req, res) => {
         entries
       }
     })
+  } catch(err) {
+    res.status(400).json({
+      status: "Error"
+    })
+  }
 })
-app.get('/log', (req, res) => {res.status(200).sendFile('logs/errors.log', {root: __dirname})})
+app.get('/log', (req, res) => {
+  if(req.body.email === "admin@email.com")
+    res.status(200).sendFile('logs/errors.log', {root: __dirname})
+  else
+  res.status(403).json("not allowed")
+})
 
 app.listen(process.env.PORT || 3000)
