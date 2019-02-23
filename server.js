@@ -16,7 +16,7 @@ const app = express()
 app.use(express.json())
 
 const cors = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://the24thds.github.io/aFaceWithABrain-Frontend/')
+  res.header('Access-Control-Allow-Origin', 'https://the24thds.github.io')
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.header('Access-Control-Allow-Headers', '*')
   // CORS on steroids
