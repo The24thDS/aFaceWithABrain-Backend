@@ -31,7 +31,7 @@ app.use(cors)
 app.post('/clarifai', clarifai.handleImage(db))
 app.post('/register', register.handleRegister(db, bcrypt))
 app.post('/signin', signin.handleLogin(db, bcrypt))
-app.get('/entries', async (req, res) => {
+app.post('/entries', async (req, res) => {
     const { email } = req.body
     try {
     const queryResult = await db('users').select('entries').where({email})
@@ -48,7 +48,7 @@ app.get('/entries', async (req, res) => {
     })
   }
 })
-app.get('/log', (req, res) => {
+app.post('/log', (req, res) => {
   if(req.body.email === "admin@email.com")
     res.status(200).sendFile('logs/errors.log', {root: __dirname})
   else
