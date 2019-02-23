@@ -46,7 +46,7 @@ app.get('/entries', async (req, res) => {
   }
 })
 app.get('/log', (req, res) => {
-  if(req.body.email === "admin@email.com")
+  if(req.body.email === "davidsima@windowslive.com")
     res.status(200).sendFile('logs/errors.log', {root: __dirname})
   else
   res.status(403).json("not allowed")
