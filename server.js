@@ -17,7 +17,7 @@ app.use(express.json())
 
 const cors = (req, res, next) => {
   // CORS on steroids
-  if(req.headers.host !== 'the24thds.github.io') //change this in production to match your origin
+  if(req.headers.origin !== 'https://the24thds.github.io') //change this in production to match your origin
     res.status(403).json(`${req.get('host')} is not allowed to access this resource`)
   else
     next()
