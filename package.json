@@ -20,7 +20,7 @@
     "bcryptjs": "^2.4.3",
     "clarifai": "^2.9.0",
     "express": "^4.16.4",
-    "knex": "^0.16.3",
+    "knex": "^0.19.1",
     "pg": "^7.8.0"
   },
   "devDependencies": {
