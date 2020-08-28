@@ -24,7 +24,7 @@
     "pg": "^7.8.0"
   },
   "devDependencies": {
-    "heroku": "^7.21.0",
+    "heroku": "^7.42.13",
     "nodemon": "^1.18.10"
   }
 }
