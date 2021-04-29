@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: heroku
+    versions:
+    - 7.47.11
+    - 7.47.12
+    - 7.47.13
+    - 7.48.0
+    - 7.49.0
+    - 7.49.1
+    - 7.50.0
+    - 7.51.0
+    - 7.52.0
+  - dependency-name: pg
+    versions:
+    - 8.5.1
